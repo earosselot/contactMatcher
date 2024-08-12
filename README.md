@@ -53,8 +53,8 @@ At this point there is a `ScoreMapper` that will transform scores into accuracy.
 Again, this is also configurable, but the default values are:
 - score >= 75 -> High accuracy match
 - score >= 50 -> Medium accuracy match
-- score >= 20 -> Low accuracy match
-- score < 20 -> Not a Match
+- score >= 35 -> Low accuracy match
+- score < 35 -> Not a Match
 
 ## Avoid duplication
 
@@ -106,3 +106,13 @@ Examples of Initial Match are:
 This comparison will be performed on the fields that has initial match activated only. This is because
 from my point of view there is no point on match an email, or a zip code for an initial. Again, this is
 configurable and can be changed.
+
+### Possible Improvements
+
+- Based on experience the Thresholds for similarity and for matches can be tuned. After watching the examples,
+I think I have put to low scores on name initials and too much on name similarities.
+- Email local-part and domain can be analyzed separately, given the local-part is much more important to detect 
+duplicated contacts than the domain.
+- Instead of avoiding duplication from start, it could be changed to consider the most similar contact, instead of 
+the first. E.g.: contact1 is similar to contact2 with low accuracy. This will lead to contact3 not being able to
+be compared with contact2 even when they might be similar with high or medium accuracy.
